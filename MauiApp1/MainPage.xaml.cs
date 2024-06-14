@@ -47,7 +47,7 @@ public partial class MainPage : ContentPage
 		};
 
 		// Calling the PickAsync method
-		var filePicked = await FilePicker.PickAsync(options);
+		var filePicked = await filePicker.PickAsync(options);
 		await DisplayAlert("File Picked", $"The file picked is: {filePicked.FileName}", "OK");
 
 	}
