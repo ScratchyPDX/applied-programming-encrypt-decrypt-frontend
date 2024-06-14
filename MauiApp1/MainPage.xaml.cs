@@ -6,14 +6,16 @@ namespace MauiApp1;
 public partial class MainPage : ContentPage
 {
 	int count = 0;
-	IFileSaver fileSaver;
-	CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+	readonly IFileSaver fileSaver;
+	readonly IFilePicker filePicker;
+	readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-	
-	public MainPage(IFileSaver fileSaver)
+
+	public MainPage(IFileSaver fileSaver, IFilePicker filePicker)
 	{
 		InitializeComponent();
 		this.fileSaver = fileSaver;
+		this.filePicker = filePicker;
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
@@ -30,11 +32,25 @@ public partial class MainPage : ContentPage
 
 
 	private void OnSaveFileClicked(object sender, EventArgs e)
-	{ 
-			// Creating the stream
-			using var stream = new MemoryStream(Encoding.Default.GetBytes("Howdy! I'm a new file!"));
-			// Calling  the SaveAsync method
-			fileSaver.SaveAsync("SampleFile.txt", stream, cancellationTokenSource.Token);
+	{
+		// Creating the stream
+		using var stream = new MemoryStream(Encoding.Default.GetBytes("Howdy! I'm a new file!"));
+		// Calling  the SaveAsync method
+		fileSaver.SaveAsync("SampleFile.txt", stream, cancellationTokenSource.Token);
 	}
+
+	private async void OnPickFileClicked(object sender, EventArgs e)
+	{
+		PickOptions options = new()
+		{
+			PickerTitle = "Please select a text file"
+		};
+
+		// Calling the PickAsync method
+		var filePicked = await FilePicker.PickAsync(options);
+		await DisplayAlert("File Picked", $"The file picked is: {filePicked.FileName}", "OK");
+
+	}
+	
 }
 

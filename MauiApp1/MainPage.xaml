@@ -32,6 +32,13 @@
                 HorizontalOptions="Fill" />
 
             <Button
+                x:Name="PickFileBtn"
+                Text="Pick a File" 
+                SemanticProperties.Hint="Let's you pick a file"
+                Clicked="OnPickFileClicked"
+                HorizontalOptions="Fill" />    
+
+            <Button
                 x:Name="SaveFileBtn"
                 Text="Save File Here!" 
                 SemanticProperties.Hint="Opens the SaveFile dialog ... hopefully"
