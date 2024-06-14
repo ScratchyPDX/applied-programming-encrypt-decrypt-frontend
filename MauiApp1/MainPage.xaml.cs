@@ -1,12 +1,19 @@
-﻿namespace MauiApp1;
+﻿using System.Text;
+using CommunityToolkit.Maui.Storage;
+
+namespace MauiApp1;
 
 public partial class MainPage : ContentPage
 {
 	int count = 0;
+	IFileSaver fileSaver;
+	CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-	public MainPage()
+	
+	public MainPage(IFileSaver fileSaver)
 	{
 		InitializeComponent();
+		this.fileSaver = fileSaver;
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
@@ -19,6 +26,15 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
+	}
+
+
+	private void OnSaveFileClicked(object sender, EventArgs e)
+	{ 
+			// Creating the stream
+			using var stream = new MemoryStream(Encoding.Default.GetBytes("Howdy! I'm a new file!"));
+			// Calling  the SaveAsync method
+			fileSaver.SaveAsync("SampleFile.txt", stream, cancellationTokenSource.Token);
 	}
 }
 
