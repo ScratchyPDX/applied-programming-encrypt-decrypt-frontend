@@ -9,6 +9,7 @@ public partial class MainPage : ContentPage
 	readonly IFileSaver fileSaver;
 	readonly IFilePicker filePicker;
 	readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+	string textInput = string.Empty;
 
 
 	public MainPage(IFileSaver fileSaver, IFilePicker filePicker)
@@ -16,6 +17,7 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 		this.fileSaver = fileSaver;
 		this.filePicker = filePicker;
+		CounterBtn.IsEnabled = false;
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
@@ -34,9 +36,9 @@ public partial class MainPage : ContentPage
 	private void OnSaveFileClicked(object sender, EventArgs e)
 	{
 		// Creating the stream
-		using var stream = new MemoryStream(Encoding.Default.GetBytes("Howdy! I'm a new file!"));
+		using var stream = new MemoryStream(Encoding.Default.GetBytes(this.textInput));
 		// Calling  the SaveAsync method
-		fileSaver.SaveAsync("SampleFile.txt", stream, cancellationTokenSource.Token);
+		fileSaver.SaveAsync("test.txt", stream, cancellationTokenSource.Token);
 	}
 
 	private async void OnPickFileClicked(object sender, EventArgs e)
@@ -51,6 +53,15 @@ public partial class MainPage : ContentPage
 		await DisplayAlert("File Picked", $"The file picked is: {filePicked.FileName}", "OK");
 
 	}
-	
+
+	private void OnTextInputChanged(object sender, TextChangedEventArgs e)
+	{
+		this.textInput = e.NewTextValue;
+	}
+
+	private void ToggleCounterClicked(object sender, EventArgs e)
+	{
+		CounterBtn.IsEnabled = !CounterBtn.IsEnabled;
+	}
 }
 
