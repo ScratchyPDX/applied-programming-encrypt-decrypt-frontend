@@ -17,20 +17,20 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 		this.fileSaver = fileSaver;
 		this.filePicker = filePicker;
-		CounterBtn.IsEnabled = false;
+		// CounterBtn.IsEnabled = false;
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+	// private void OnCounterClicked(object sender, EventArgs e)
+	// {
+	// 	count++;
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+	// 	if (count == 1)
+	// 		CounterBtn.Text = $"Clicked {count} time";
+	// 	else
+	// 		CounterBtn.Text = $"Clicked {count} times";
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+	// 	SemanticScreenReader.Announce(CounterBtn.Text);
+	// }
 
 
 	private void OnSaveFileClicked(object sender, EventArgs e)
@@ -59,9 +59,15 @@ public partial class MainPage : ContentPage
 		this.textInput = e.NewTextValue;
 	}
 
-	private void ToggleCounterClicked(object sender, EventArgs e)
+	private void OnEncryptTextClicked(object sender, EventArgs e)
 	{
-		CounterBtn.IsEnabled = !CounterBtn.IsEnabled;
+		return;
+	}
+
+	
+	private void OnDecryptTextClicked(object sender, EventArgs e)
+	{
+		return;
 	}
 }
 

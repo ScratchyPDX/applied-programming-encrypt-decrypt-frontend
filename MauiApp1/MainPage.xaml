@@ -8,8 +8,8 @@
             Padding="30,0"
             Spacing="25">
             <Image
-                Source="encrypt.png"
-                HeightRequest="300"
+                Source="encryption.jpg"
+                HeightRequest="250"
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a race car number eight" />
 
@@ -30,18 +30,61 @@
                 SemanticProperties.HeadingLevel="Level4"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+
+            <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
+
+            <Label
+                Text="Plain or Decrypted Text:"
+                Style="{StaticResource SubHeadline}"
+                HorizontalTextAlignment="Start"
+                SemanticProperties.HeadingLevel="Level4"
+                SemanticProperties.Description="Encrypted text will be displayed here" />
+                
+            <Entry
+                x:Name="TextInputField"
+                TextChanged="OnTextInputChanged"
+                Placeholder="Enter text here"
+                FontSize="25"
                 HorizontalOptions="Fill" />
 
-            <Button
-                x:Name="ToggleCounterBtn"
-                Text="Toggle Click Me Button" 
-                Clicked="ToggleCounterClicked"
-                HorizontalOptions="Fill" />            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="440" />
+                    <ColumnDefinition Width="440" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    x:Name="EncryptBtn"
+                    Text="Encrypt Text" 
+                    Clicked="OnEncryptTextClicked"
+                    HorizontalOptions="Start"
+                    WidthRequest="400" />    
+
+                <Button
+                    x:Name="DecryptBtn"
+                    Text="Decrypt Text" 
+                    Clicked="OnDecryptTextClicked"
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Column="2"
+                    WidthRequest="400" />
+            </Grid>
+
+
+            <Label
+                Text="Encrypted Text:"
+                Style="{StaticResource SubHeadline}"
+                HorizontalTextAlignment="Start"
+                SemanticProperties.HeadingLevel="Level4"
+                SemanticProperties.Description="Encrypted text will be displayed here" />
+
+            <Entry
+                x:Name="TextOutputField"
+                TextChanged="OnTextOutputChanged"
+                Placeholder="Encrypted text will be displayed here"
+                FontSize="25"
+                IsReadOnly="True"
+                HorizontalOptions="Fill" />
+
+            <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
 
             <Button
                 x:Name="PickFileBtn"
@@ -50,18 +93,13 @@
                 Clicked="OnPickFileClicked"
                 HorizontalOptions="Fill" />    
 
-            <Entry
-                x:Name="TextInputField"
-                TextChanged="OnTextInputChanged"
-                Placeholder="Enter text here"
-                HorizontalOptions="Fill" />
-
             <Button
                 x:Name="SaveFileBtn"
                 Text="Save File Here!" 
                 SemanticProperties.Hint="Opens the SaveFile dialog ... hopefully"
                 Clicked="OnSaveFileClicked"
-                HorizontalOptions="Fill" />                
+                HorizontalOptions="Fill" />          
+
         </VerticalStackLayout>
     </ScrollView>
 
