@@ -29,20 +29,28 @@
             <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
 
             <Label
-                Text="Enter Plain or Display Decrypted Text Here:"
+                Text="Text Operations"
                 Style="{StaticResource SubHeadline}"
                 HorizontalTextAlignment="Start"
                 SemanticProperties.HeadingLevel="Level4"
                 SemanticProperties.Description="Encrypted text will be displayed here" />
                 
             <Entry
-                x:Name="TextInputField"
-                TextChanged="OnTextInputChanged"
+                x:Name="DecryptedTextDisplayField"
+                TextChanged="OnDecryptedTextChanged"
                 Placeholder="Enter text here"
                 FontSize="25"
                 HorizontalOptions="Fill" />
+
+            <Entry
+                x:Name="EncryptedTextDisplayField"
+                TextChanged="OnEncryptedTextChanged"
+                Placeholder="Encrypted text will be displayed here"
+                FontSize="25"
+                HorizontalOptions="Fill" />
+
             <!--left, top, right, bottom-->
-            <Grid Margin="0,0,0,20">
+            <Grid Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/> <!-- First column -->
                     <ColumnDefinition Width="*"/> <!-- Second column -->
@@ -65,26 +73,16 @@
                     Grid.Column="1" />
             </Grid>
 
-
-            <Label
-                Text="Display Encrypted Text Here:"
-                Style="{StaticResource SubHeadline}"
-                HorizontalTextAlignment="Start"
-                SemanticProperties.HeadingLevel="Level4"
-                SemanticProperties.Description="Encrypted text will be displayed here" />
-
-            <Entry
-                x:Name="TextOutputField"
-                TextChanged="OnTextOutputChanged"
-                Placeholder="Encrypted text will be displayed here"
-                FontSize="25"
-                IsReadOnly="True"
-                HorizontalOptions="Fill" />
+            <Button
+                x:Name="ResetFormBtn"
+                Text="Reset Form" 
+                Clicked="OnResetFormClicked"
+                HorizontalOptions="Fill" /> 
 
             <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
 
             <Label
-                Text="Get Encrypted From or Save Encrypted Text To a File :"
+                Text="File Operations"
                 Style="{StaticResource SubHeadline}"
                 HorizontalTextAlignment="Start"
                 SemanticProperties.HeadingLevel="Level4"

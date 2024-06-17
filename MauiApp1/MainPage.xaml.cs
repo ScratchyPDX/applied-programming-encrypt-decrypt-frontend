@@ -1,44 +1,31 @@
 ﻿using System.Text;
 using CommunityToolkit.Maui.Storage;
 
+
 namespace MauiApp1;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
 	readonly IFileSaver fileSaver;
 	readonly IFilePicker filePicker;
 	readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-	string textInput = string.Empty;
-
 
 	public MainPage(IFileSaver fileSaver, IFilePicker filePicker)
 	{
 		InitializeComponent();
 		this.fileSaver = fileSaver;
 		this.filePicker = filePicker;
-		// CounterBtn.IsEnabled = false;
+		SaveFileBtn.IsEnabled = false;
+		DecryptBtn.IsEnabled = false;
+		EncryptBtn.IsEnabled = false;
 	}
-
-	// private void OnCounterClicked(object sender, EventArgs e)
-	// {
-	// 	count++;
-
-	// 	if (count == 1)
-	// 		CounterBtn.Text = $"Clicked {count} time";
-	// 	else
-	// 		CounterBtn.Text = $"Clicked {count} times";
-
-	// 	SemanticScreenReader.Announce(CounterBtn.Text);
-	// }
-
 
 	private void OnSaveFileClicked(object sender, EventArgs e)
 	{
 		// Creating the stream
-		using var stream = new MemoryStream(Encoding.Default.GetBytes(this.textInput));
-		// Calling  the SaveAsync method
-		fileSaver.SaveAsync("test.txt", stream, cancellationTokenSource.Token);
+		using var stream = new MemoryStream(Encoding.Default.GetBytes(EncryptedTextDisplayField.Text));
+        // Calling  the SaveAsync method
+        _ = fileSaver.SaveAsync("test.txt", stream, cancellationTokenSource.Token);
 	}
 
 	private async void OnOpenFileClicked(object sender, EventArgs e)
@@ -54,25 +41,33 @@ public partial class MainPage : ContentPage
 
 	}
 
-	private void OnTextInputChanged(object sender, TextChangedEventArgs e)
-	{
-		this.textInput = e.NewTextValue;
-	}
-
-	private void OnTextOutputChanged(object sender, TextChangedEventArgs e)
-	{
-		this.textInput = e.NewTextValue;
-	}
-
 	private void OnEncryptTextClicked(object sender, EventArgs e)
 	{
-		return;
+		EncryptedTextDisplayField.Text = Crypto.EncryptString(DecryptedTextDisplayField.Text);
+		DecryptedTextDisplayField.Text = string.Empty;
 	}
 
 	
 	private void OnDecryptTextClicked(object sender, EventArgs e)
 	{
-		return;
+		DecryptedTextDisplayField.Text = Crypto.DecryptString(EncryptedTextDisplayField.Text);
+		EncryptedTextDisplayField.Text = string.Empty;
+	}
+
+	private void OnResetFormClicked(object sender, EventArgs e)
+	{
+		DecryptedTextDisplayField.Text = string.Empty;
+		EncryptedTextDisplayField.Text = string.Empty;
+	}
+
+	private void OnDecryptedTextChanged(object sender, TextChangedEventArgs e)
+	{
+		EncryptBtn.IsEnabled = !string.IsNullOrEmpty(DecryptedTextDisplayField.Text);
+	}
+
+	private void OnEncryptedTextChanged(object sender, TextChangedEventArgs e)
+	{
+		SaveFileBtn.IsEnabled = !string.IsNullOrEmpty(EncryptedTextDisplayField.Text);
+		DecryptBtn.IsEnabled = !string.IsNullOrEmpty(EncryptedTextDisplayField.Text);
 	}
 }
-
