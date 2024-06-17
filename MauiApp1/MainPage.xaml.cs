@@ -9,6 +9,7 @@ public partial class MainPage : ContentPage
 	readonly IFileSaver fileSaver;
 	readonly IFilePicker filePicker;
 	readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+	private string filePath = string.Empty;
 
 	public MainPage(IFileSaver fileSaver, IFilePicker filePicker)
 	{
@@ -18,14 +19,18 @@ public partial class MainPage : ContentPage
 		SaveFileBtn.IsEnabled = false;
 		DecryptBtn.IsEnabled = false;
 		EncryptBtn.IsEnabled = false;
+		this.filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "test.txt");
 	}
 
-	private void OnSaveFileClicked(object sender, EventArgs e)
+	private async void OnSaveFileClicked(object sender, EventArgs e)
 	{
 		// Creating the stream
 		using var stream = new MemoryStream(Encoding.Default.GetBytes(EncryptedTextDisplayField.Text));
-        // Calling  the SaveAsync method
-        _ = fileSaver.SaveAsync("test.txt", stream, cancellationTokenSource.Token);
+		// Calling  the SaveAsync method
+		var fileSaved = await fileSaver.SaveAsync("test.txt", stream, cancellationTokenSource.Token);
+		if(fileSaved.IsSuccessful) {
+			this.filePath = fileSaved.FilePath;
+		}
 	}
 
 	private async void OnOpenFileClicked(object sender, EventArgs e)
@@ -36,9 +41,9 @@ public partial class MainPage : ContentPage
 		};
 
 		// Calling the PickAsync method
-		var filePicked = await filePicker.PickAsync(options);
-		await DisplayAlert("File Picked", $"The file picked is: {filePicked.FileName}", "OK");
-
+		var fileOpened = await filePicker.PickAsync(options);
+		this.filePath = fileOpened.FullPath;
+		EncryptedTextDisplayField.Text = await File.ReadAllTextAsync(filePath);
 	}
 
 	private void OnEncryptTextClicked(object sender, EventArgs e)
