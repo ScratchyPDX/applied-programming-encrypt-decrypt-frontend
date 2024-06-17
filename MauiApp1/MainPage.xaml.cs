@@ -41,7 +41,7 @@ public partial class MainPage : ContentPage
 		fileSaver.SaveAsync("test.txt", stream, cancellationTokenSource.Token);
 	}
 
-	private async void OnPickFileClicked(object sender, EventArgs e)
+	private async void OnOpenFileClicked(object sender, EventArgs e)
 	{
 		PickOptions options = new()
 		{
@@ -55,6 +55,11 @@ public partial class MainPage : ContentPage
 	}
 
 	private void OnTextInputChanged(object sender, TextChangedEventArgs e)
+	{
+		this.textInput = e.NewTextValue;
+	}
+
+	private void OnTextOutputChanged(object sender, TextChangedEventArgs e)
 	{
 		this.textInput = e.NewTextValue;
 	}

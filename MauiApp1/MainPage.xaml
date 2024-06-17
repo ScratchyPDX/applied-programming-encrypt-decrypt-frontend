@@ -9,14 +9,9 @@
             Spacing="25">
             <Image
                 Source="encryption.jpg"
-                HeightRequest="250"
+                HeightRequest="200"
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a race car number eight" />
-
-            <Label
-                Text="Sercrets 'R Us!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
 
             <Label
                 Text="Welcome to an encryption utility built using .NET Maui"
@@ -25,16 +20,16 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
             <Label
-                Text="This utility can encrpt and decrypt text input by a user. It can also read/write encrypted text from/to a file"
+                Text="This utility can encrpt and decrypt text input by a user&#x0d;&#x0a;It can also read/write encrypted text from/to a file"
                 Style="{StaticResource SubSubHeadline}"
                 SemanticProperties.HeadingLevel="Level4"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                SemanticProperties.Description="Welcome to dot net Multi platform App UI" />
 
 
             <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
 
             <Label
-                Text="Plain or Decrypted Text:"
+                Text="Enter Plain or Display Decrypted Text Here:"
                 Style="{StaticResource SubHeadline}"
                 HorizontalTextAlignment="Start"
                 SemanticProperties.HeadingLevel="Level4"
@@ -46,31 +41,33 @@
                 Placeholder="Enter text here"
                 FontSize="25"
                 HorizontalOptions="Fill" />
-
-            <Grid>
+            <!--left, top, right, bottom-->
+            <Grid Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="440" />
-                    <ColumnDefinition Width="440" />
+                    <ColumnDefinition Width="*"/> <!-- First column -->
+                    <ColumnDefinition Width="*"/> <!-- Second column -->
                 </Grid.ColumnDefinitions>
+                <Grid.ColumnSpacing>30</Grid.ColumnSpacing>
                 <Button
                     x:Name="EncryptBtn"
                     Text="Encrypt Text" 
                     Clicked="OnEncryptTextClicked"
-                    HorizontalOptions="Start"
-                    WidthRequest="400" />    
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" 
+                    Grid.Column="0"/>    
 
                 <Button
                     x:Name="DecryptBtn"
                     Text="Decrypt Text" 
                     Clicked="OnDecryptTextClicked"
                     HorizontalOptions="FillAndExpand"
-                    Grid.Column="2"
-                    WidthRequest="400" />
+                    VerticalOptions="FillAndExpand" 
+                    Grid.Column="1" />
             </Grid>
 
 
             <Label
-                Text="Encrypted Text:"
+                Text="Display Encrypted Text Here:"
                 Style="{StaticResource SubHeadline}"
                 HorizontalTextAlignment="Start"
                 SemanticProperties.HeadingLevel="Level4"
@@ -86,16 +83,23 @@
 
             <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
 
+            <Label
+                Text="Get Encrypted From or Save Encrypted Text To a File :"
+                Style="{StaticResource SubHeadline}"
+                HorizontalTextAlignment="Start"
+                SemanticProperties.HeadingLevel="Level4"
+                SemanticProperties.Description="Encrypted text will be displayed here" />
+
             <Button
-                x:Name="PickFileBtn"
-                Text="Pick a File" 
+                x:Name="OpenFileBtn"
+                Text="Get Encrypted Text From a File" 
                 SemanticProperties.Hint="Let's you pick a file"
-                Clicked="OnPickFileClicked"
+                Clicked="OnOpenFileClicked"
                 HorizontalOptions="Fill" />    
 
             <Button
                 x:Name="SaveFileBtn"
-                Text="Save File Here!" 
+                Text="Save Encrypted Text to a File" 
                 SemanticProperties.Hint="Opens the SaveFile dialog ... hopefully"
                 Clicked="OnSaveFileClicked"
                 HorizontalOptions="Fill" />          
