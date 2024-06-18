@@ -19,7 +19,6 @@ public partial class MainPage : ContentPage
 		SaveFileBtn.IsEnabled = false;
 		DecryptBtn.IsEnabled = false;
 		EncryptBtn.IsEnabled = false;
-		this.filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "test.txt");
 	}
 
 	private async void OnSaveFileClicked(object sender, EventArgs e)
@@ -28,9 +27,6 @@ public partial class MainPage : ContentPage
 		using var stream = new MemoryStream(Encoding.Default.GetBytes(EncryptedTextDisplayField.Text));
 		// Calling  the SaveAsync method
 		var fileSaved = await fileSaver.SaveAsync("test.txt", stream, cancellationTokenSource.Token);
-		if(fileSaved.IsSuccessful) {
-			this.filePath = fileSaved.FilePath;
-		}
 	}
 
 	private async void OnOpenFileClicked(object sender, EventArgs e)
@@ -42,8 +38,7 @@ public partial class MainPage : ContentPage
 
 		// Calling the PickAsync method
 		var fileOpened = await filePicker.PickAsync(options);
-		this.filePath = fileOpened.FullPath;
-		EncryptedTextDisplayField.Text = await File.ReadAllTextAsync(filePath);
+		EncryptedTextDisplayField.Text = await File.ReadAllTextAsync(fileOpened.FullPath);
 	}
 
 	private void OnEncryptTextClicked(object sender, EventArgs e)
@@ -67,12 +62,23 @@ public partial class MainPage : ContentPage
 
 	private void OnDecryptedTextChanged(object sender, TextChangedEventArgs e)
 	{
-		EncryptBtn.IsEnabled = !string.IsNullOrEmpty(DecryptedTextDisplayField.Text);
+		if(string.IsNullOrEmpty(DecryptedTextDisplayField.Text)){
+			EncryptBtn.IsEnabled = false;
+		}
+		else{
+			EncryptBtn.IsEnabled = true;
+		}
 	}
 
 	private void OnEncryptedTextChanged(object sender, TextChangedEventArgs e)
 	{
-		SaveFileBtn.IsEnabled = !string.IsNullOrEmpty(EncryptedTextDisplayField.Text);
-		DecryptBtn.IsEnabled = !string.IsNullOrEmpty(EncryptedTextDisplayField.Text);
+		if(string.IsNullOrEmpty(EncryptedTextDisplayField.Text)){
+			DecryptBtn.IsEnabled = false;
+			SaveFileBtn.IsEnabled = false;
+		}
+		else{
+			DecryptBtn.IsEnabled = true;
+			SaveFileBtn.IsEnabled = true;
+		}
 	}
 }
