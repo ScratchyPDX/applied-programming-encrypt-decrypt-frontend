@@ -37,3 +37,5 @@ This project also depends on a class library (DLL) for cryptography. It is writt
 - Instead of including the Crypto class library directly in the project, further steps would import the Crypto library from NuGet.
 
 - I'm not a UI/UX designer, so involving someone who is more skilled in this area would be nice. While the application is functional, it might not be layed out in the most user-friendly configuration.
+
+- Clean-up leftover reference to "MauiApp1" that was included when the project was first created. These references do not effect the app's function, however.
