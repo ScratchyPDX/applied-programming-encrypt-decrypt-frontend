@@ -10,7 +10,7 @@ However, it occurred to me that, in today's business environment, a console appl
 
 Unlike a web application or website written using Javascript, HTML and/or Angular, .NET Maui apps are install and run directly on the host device, and are supported Android, iOS, Windows, Linux and MacOS. When properly configured, a single code base can be built and deployed to any or all of these devices/operating systems without the need for device/OS-specific program code.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/_CyEY9at8n8)
 
 # Development Environment
 
