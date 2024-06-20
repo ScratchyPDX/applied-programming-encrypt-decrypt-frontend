@@ -38,7 +38,7 @@
             <Entry
                 x:Name="DecryptedTextDisplayField"
                 TextChanged="OnDecryptedTextChanged"
-                Placeholder="Enter text here"
+                Placeholder="Enter unencrypted text here"
                 FontSize="25"
                 HorizontalOptions="Fill"
                 SemanticProperties.Description="editbox containing decrypted text" />
