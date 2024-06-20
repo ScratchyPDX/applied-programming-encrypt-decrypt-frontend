@@ -11,19 +11,19 @@
                 Source="encryption.png"
                 HeightRequest="200"
                 Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
+                SemanticProperties.Description="image of a digital key and keyhole" />
 
             <Label
                 Text="Welcome to an encryption utility built using .NET Maui"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                SemanticProperties.Description="welcome heading" />
 
             <Label
                 Text="This utility can encrpt and decrypt text input by a user&#x0d;&#x0a;It can also read/write encrypted text from/to a file"
                 Style="{StaticResource SubSubHeadline}"
                 SemanticProperties.HeadingLevel="Level4"
-                SemanticProperties.Description="Welcome to dot net Multi platform App UI" />
+                SemanticProperties.Description="app description subheading" />
 
 
             <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
@@ -33,21 +33,23 @@
                 Style="{StaticResource SubHeadline}"
                 HorizontalTextAlignment="Start"
                 SemanticProperties.HeadingLevel="Level4"
-                SemanticProperties.Description="Encrypted text will be displayed here" />
+                SemanticProperties.Description="title for text operations" />
                 
             <Entry
                 x:Name="DecryptedTextDisplayField"
                 TextChanged="OnDecryptedTextChanged"
                 Placeholder="Enter text here"
                 FontSize="25"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                SemanticProperties.Description="editbox containing decrypted text" />
 
             <Entry
                 x:Name="EncryptedTextDisplayField"
                 TextChanged="OnEncryptedTextChanged"
                 Placeholder="Encrypted text will be displayed here"
                 FontSize="25"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                SemanticProperties.Description="editbox containing encrypted text" />
 
             <!--left, top, right, bottom-->
             <Grid Margin="0,0,0,0">
@@ -62,7 +64,8 @@
                     Clicked="OnEncryptTextClicked"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" 
-                    Grid.Column="0"/>    
+                    Grid.Column="0"
+                    SemanticProperties.Description="button to encrypt text" />    
 
                 <Button
                     x:Name="DecryptBtn"
@@ -70,14 +73,16 @@
                     Clicked="OnDecryptTextClicked"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" 
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    SemanticProperties.Description="button to decrypt text" />
             </Grid>
 
             <Button
                 x:Name="ResetFormBtn"
                 Text="Reset Form" 
                 Clicked="OnResetFormClicked"
-                HorizontalOptions="Fill" /> 
+                HorizontalOptions="Fill" 
+                SemanticProperties.Description="button to reset form" /> 
 
             <Line X1="0" Y1="10" X2="900" Y2="10" Stroke="White" />
 
@@ -86,21 +91,21 @@
                 Style="{StaticResource SubHeadline}"
                 HorizontalTextAlignment="Start"
                 SemanticProperties.HeadingLevel="Level4"
-                SemanticProperties.Description="Encrypted text will be displayed here" />
+                SemanticProperties.Description="file operations heading" />
 
             <Button
                 x:Name="OpenFileBtn"
                 Text="Get Encrypted Text From a File" 
-                SemanticProperties.Hint="Let's you pick a file"
                 Clicked="OnOpenFileClicked"
-                HorizontalOptions="Fill" />    
+                HorizontalOptions="Fill" 
+                SemanticProperties.Description="button to open a text file containing encrypted text" />    
 
             <Button
                 x:Name="SaveFileBtn"
                 Text="Save Encrypted Text to a File" 
-                SemanticProperties.Hint="Opens the SaveFile dialog ... hopefully"
                 Clicked="OnSaveFileClicked"
-                HorizontalOptions="Fill" />          
+                HorizontalOptions="Fill" 
+                SemanticProperties.Description="button to save encrypted text to a file" />          
 
         </VerticalStackLayout>
     </ScrollView>
